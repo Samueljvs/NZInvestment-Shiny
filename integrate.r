@@ -10,8 +10,6 @@
    ##
    ##    Clear the decks and load up some functionality
    ##
-      rm(list=ls(all=TRUE))
-      
    ##
    ##    Core libraries
    ##
@@ -31,20 +29,13 @@
 	  library(knitr)
 	  library(rmarkdown)
 	  library(cowplot)
-	 	
+	  library(shiny)	
+	  library(janitor)
    ## 
    ##    Set working directory
    ##
-      setwd("C:\\R Work\\Utilisation\\")
-	  
-	  
-	  ## First programme builds the required data and graphics
-	  ## The seoncd will be an R-markdown file, which will use the first one to build the report with all the needed graphs, tables and drafted words
-	  
-	  source("Programmes/Mod_1_Analysis.r")
-
-	  render('Programmes/Sparteca_Note.Rmd', output_dir = "Product_Output")
-		
+      setwd("C:/R-Work/NZInvestment-Shiny")
+	
 		
 ##
 ##   End of programme

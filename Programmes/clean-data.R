@@ -7,7 +7,7 @@
 ##
 ##    Author   :  Sam Verevis, 3/28/2022
 ##
-    ## Load raw data
+    ## Load raw country direct investment data
     ##
         raw_df <- read_csv("Data_Raw/IIP456201_20220328_101307_67.csv", skip = 2) %>%
                     filter(!row_number() %in% 22:50) %>%
@@ -24,4 +24,4 @@
                     mutate(country = ifelse(is.na(country), "Total", country),
                            direction = str_replace(direction, " total", ""))
 
-
+        saveRDS(raw_df, file = "Data_Intermediate/direct_invest.RDS")

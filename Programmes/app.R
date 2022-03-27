@@ -16,47 +16,59 @@
     ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("New Zealand Investment Data"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
+            sliderInput(inputId = "rngID",
+                        label = "Year to March",
+                        min = min(invest_df$year),
+                        value = c(2001, 2021),
+                        max = max(invest_df$year),
+                        sep = ""
+                    ),
+            selectInput(inputId = "directID",
+                        label = "Direction of Direct Investment",
+                        choices = distinct(invest_df, direction),
+                        selected = " NZ's direct inv. abroad",
+                        multiple = FALSE
+                    ),
+            selectInput(inputId = "countryID",
+                        label = "Country",
+                        choices = distinct(invest_df, country),
+                        selected = "Total",
+                        multiple = TRUE
+                     )
+            ),
 
         # Show a plot of the generated distribution
         mainPanel(
-           plotOutput("distPlot")
+           plotOutput("investplot")
+            )
         )
     )
-)
-
-
 
 
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    selected_df <- reactive(invest_df %>%
+                                filter(year >= input$rngID[1] & year <= input$rngID[2], 
+                                       direction == input$directID,
+                                       country %in% input$countryID))
 
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+
+    output$investplot <- renderPlot({
+        selected_df() %>%
+            ggplot(aes(year, value, col = country)) +
+                geom_line()
     })
 }
 
 
 # Run the application 
 shinyApp(ui = ui, server = server)
-	
-		
-		
 
 		

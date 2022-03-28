@@ -11,10 +11,10 @@
     ##
         raw_df <- read_csv("Data_Raw/IIP456201_20220328_101307_67.csv", skip = 2) %>%
                     filter(!row_number() %in% 22:50) %>%
-                    rename(Year = 1) %>%
+                    rename(year = 1) %>%
                     select(-3) %>%
                     mutate(across(everything(), ~ as.numeric(str_replace_all(.x, "[..]", "0")))) %>%
-                    pivot_longer(cols = -Year,
+                    pivot_longer(cols = -year,
                                  names_to = "to_sort"
                     ) %>%
                     separate(col = to_sort,

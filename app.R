@@ -8,11 +8,11 @@
 
 ## load packages and Data
 ##
-      library(readr)
-      library(ggplot2)
-      library(stringr)
-      library(lubridate)
-      library(stringi)
+    library(readr)
+    library(ggplot2)
+    library(stringr)
+    library(lubridate)
+    library(stringi)
 	  library(dplyr)
 	  library(tidyr)
 	  library(ggthemes)
@@ -26,12 +26,12 @@
 	  library(cowplot)
 	  library(shiny)	
 	  library(janitor)
-   ## 
+
    ##    Set working directory
    ##
       setwd("C:/R-Work/NZInvestment-Shiny")
 
-    invest_df <- readRDS("Data_Intermediate/direct_invest.RDS")
+      invest_df <- readRDS("Data_Intermediate/direct_invest.RDS")
 
 
     ## Client side set-up UX
